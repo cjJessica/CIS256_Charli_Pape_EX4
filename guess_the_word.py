@@ -7,29 +7,37 @@ import random
 
 
 #Functions
+def check_guess(user_word_display, user_input, correct_word):
+    """Checks to see if the user's input is in the word, if so it changes the displayed word's underscore to the actual letter via for in range."""
+    if user_input in correct_word:
+        for pos in range(len(correct_word)):
+            if correct_word[pos] == user_input:
+                user_word_display[pos] = correct_word[pos]
+        #Return true if correct
+        return True
+    else:
+        #Return false if incorrect
+        return False
+
+
+
 def user_guess(user_word_display, user_input):
-    """Checks to see if the user's input is in the word, if so it changes the displayed word's underscore to the actual letter via for in range. But if the input is not in the word, one life is lost"""
+    """ Calls another function, check_guess, to see if the guess is correct. If it is, it will output a message accordingly. But if it isn't the user losses one life"""
     
     #Made num_of_guesses public so that function does not raise error
     global num_of_guesses
-    
-    if user_input in word:
-        for pos in range(length):
-            if word[pos] == user_input:
-                user_word_display[pos] = word[pos]
+
+    #In order to make the unittesting run more smoothly i put the checking of the guess in a seperate function named check_guess
+    if check_guess(user_word_display, user_input, word) == True:
         print("Correct!")
         print(user_word_display)
-
-        #Return true if correct
-        return True
+    
     
     else:
         num_of_guesses -= 1
         print(f"Incorrect. You now have {num_of_guesses} guesses left.\n")
         print(user_word_display)
-        #Return false if incorrect
-        return False       
-    
+
 
 def was_not_guessed(user_input):
     """Checks to see if the user has already guessed the letter, if so function will return False. But if it's a new guess, the user's input will be added to the guess list and the function will return True"""
