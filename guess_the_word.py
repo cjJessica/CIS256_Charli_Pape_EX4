@@ -5,23 +5,6 @@
 #Import random library
 import random
 
-#VARIABLES
-# --Creation of lists
-word_list = ["Potato", "Antarctica", "Treaty", "Penguins", "Isolation"]
-guess_list = []
-
-
-# --Chosing a word to guess from list randomly and making sure its all lowercase
-word = (random.choice(word_list)).lower()
-
-# --Variables for word length, # of guesses, and what is displayed to user
-length = len(word)
-num_of_guesses = 5
-display_word = ["_"] * length
-
-# --This variable will control when the while loop ends
-completed = False
-
 
 #Functions
 def user_guess(user_word_display, user_input):
@@ -36,10 +19,16 @@ def user_guess(user_word_display, user_input):
                 user_word_display[pos] = word[pos]
         print("Correct!")
         print(user_word_display)
+
+        #Return true if correct
+        return True
+    
     else:
         num_of_guesses -= 1
         print(f"Incorrect. You now have {num_of_guesses} guesses left.\n")
         print(user_word_display)
+        #Return false if incorrect
+        return False       
     
 
 def was_not_guessed(user_input):
@@ -51,6 +40,30 @@ def was_not_guessed(user_input):
     else:
         print(f"Sorry, the letter '{user_input}' was already guessed.\n")
         return False
+
+def random_word(my_list):
+    """Chosing a word to guess from list randomly and making sure its all lowercase. Then returning said word"""
+    return random.choice(my_list).lower()
+
+
+
+#VARIABLES
+# --Creation of lists
+word_list = ["Potato", "Antarctica", "Treaty", "Penguins", "Isolation"]
+guess_list = []
+
+
+
+
+# --Variables for word length, # of guesses, correct word, and what is displayed to user
+word = random_word(word_list)
+length = len(word)
+num_of_guesses = 5
+display_word = ["_"] * length
+
+# --This variable will control when the while loop ends
+completed = False
+
 
 
 
@@ -64,7 +77,7 @@ while completed == False:
     if num_of_guesses > 0:
 
         #input
-        user_input = input("\nPlease guess one letter: ")
+        user_input = input("\nPlease guess one letter: ").lower()
 
         #Runs was_not_guessed function and if true, user_guess function is ran. So if the user enters a new guess, the user_guess function will check if it is correct
         if was_not_guessed(user_input):
