@@ -69,38 +69,39 @@ length = len(word)
 num_of_guesses = 5
 display_word = ["_"] * length
 
-# --This variable will control when the while loop ends
-completed = False
 
 
 
+if __name__ == "__main__":
+    # --This variable will control when the while loop ends
+    completed = False
 
-print(display_word)
+    print(display_word)
 
 
-#while loop
-while completed == False:
-    
-    #Runs only if user has guesses left
-    if num_of_guesses > 0:
+    #while loop
+    while completed == False:
+        
+        #Runs only if user has guesses left
+        if num_of_guesses > 0:
 
-        #input
-        user_input = input("\nPlease guess one letter: ").lower()
+            #input
+            user_input = input("\nPlease guess one letter: ").lower()
 
-        #Runs was_not_guessed function and if true, user_guess function is ran. So if the user enters a new guess, the user_guess function will check if it is correct
-        if was_not_guessed(user_input):
-            user_guess(display_word, user_input)
+            #Runs was_not_guessed function and if true, user_guess function is ran. So if the user enters a new guess, the user_guess function will check if it is correct
+            if was_not_guessed(user_input):
+                user_guess(display_word, user_input)
 
-        #Checks if the display word list (when a string) is equal to 
-        if "".join(display_word) == word:
-            print("\n Congrats! You guessed the word!!!!")
+            #Checks if the display word list (when a string) is equal to 
+            if "".join(display_word) == word:
+                print("\n Congrats! You guessed the word!!!!")
+                completed = True
+                break
+
+        #Once user runs out of lives
+        else:
+            #Program will end and output the word
             completed = True
+            print(f"You failed, the word was {word}")
             break
-
-    #Once user runs out of lives
-    else:
-        #Program will end and output the word
-        completed = True
-        print(f"You failed, the word was {word}")
-        break
 
