@@ -16,15 +16,16 @@ guess = ""
 word = (random.choice(word_list)).lower()
 print(word)
 
-# --Variables for word length and # of guesses
+# --Variables for word length, # of guesses, and what is displayed to user
 length = len(word)
 num_of_guesses = 5
+display_word = ["_"] * length
 
 # --This variable will control when the while loop ends
 completed = False
 
 
-#Function
+#Functions
 def user_guess(user_word_display, user_input, lives):
 
     if user_input in word:
@@ -37,10 +38,18 @@ def user_guess(user_word_display, user_input, lives):
         print(f"You now have {lives} guesses left.")
     
 
+def was_not_guessed(user_input):
+    if user_input not in guess_list:
+        guess_list.append(user_input)
+        return True
+    else:
+        print(f"Sorry, {user_input} was already guessed.")
+        return False
 
-display_word = ["_"] * length
+
 user_guess(display_word, "a", num_of_guesses)
 
 #while loop
-#while completed == False:
-    #user input
+while completed == False:
+    if num_of_guesses > 0:
+
